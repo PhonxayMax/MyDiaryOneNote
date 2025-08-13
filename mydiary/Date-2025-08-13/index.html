@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Dev Workflow Hub — HTML/CSS/JS (Modular)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Developer Workflow Hub</h1>
+          <div class="tag">Lucidchart → Cursor/Code → CodePen/OneCompiler → Git/GitHub → Claude/ChatGPT → Evaluation</div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <input id="q" type="search" placeholder="Search cards (e.g. lucidchart, codepen, github, evaluation…)" />
+        <button id="edit">Edit Links</button>
+        <button id="reset">Reset</button>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="quicklaunch">
+        <h2 id="quicklaunch">Quick Launch</h2>
+        <div id="cards" class="grid cards"></div>
+        <div class="foot">Tip: Click <b>Edit Links</b> to customize titles/URLs and they'll be saved to your browser (localStorage).</div>
+      </section>
+
+      <section aria-labelledby="embeds">
+        <h2 id="embeds">Live Embeds</h2>
+        <div class="card">
+          <div class="row">
+            <h3>CodePen Prototype</h3>
+            <span class="pill">embedded</span>
+          </div>
+          <iframe id="codepenFrame" height="320" allowfullscreen loading="lazy"></iframe>
+          <div class="muted">If the embed doesn't load, open in a new tab: <a id="codepenLink" target="_blank" rel="noopener">Open CodePen</a></div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <h3>Planning Diagram (Lucidchart)</h3>
+            <span class="pill">open in new tab</span>
+          </div>
+          <div class="muted">Private Lucidchart docs often block iframe. Use the button to open with your access.</div>
+          <div class="kvs">
+            <a id="lucidOpen" class="btn" target="_blank" rel="noopener">Open Lucidchart</a>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="vcs">
+        <div class="row">
+          <h2 id="vcs">VCS Ops (Git/GitHub/GitKraken)</h2>
+          <span class="pill">cheatsheet</span>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Quick Actions</h3>
+            <div class="kvs">
+              <a id="githubRepo" class="btn" target="_blank" rel="noopener">Open GitHub</a>
+              <a id="gitkraken" class="btn" target="_blank" rel="noopener">Open GitKraken Site</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Push / Pull / Merge</h3>
+            <pre class="muted">git status
+git add -A
+git commit -m "update"
+git pull --rebase
+git push
+# Merge PRs in GitHub → Squash & merge</pre>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="notes">
+        <div class="row">
+          <h2 id="notes">Notes & OneNote</h2>
+          <span class="pill">links</span>
+        </div>
+        <div class="card">
+          <h3>OneNote / OneDrive</h3>
+          <div class="kvs">
+            <a id="onenoteLink" class="btn" target="_blank" rel="noopener">Open OneNote Page</a>
+            <span class="kv copy" id="localPath"></span>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="ai">
+        <div class="row">
+          <h2 id="ai">AI Assistants</h2>
+        </div>
+        <div class="grid cards">
+          <div class="card">
+            <h3>Claude Desktop / Web</h3>
+            <div class="kvs">
+              <a id="claudeChat" class="btn" target="_blank" rel="noopener">Open Claude Chat</a>
+              <a href="https://claude.ai" class="btn" target="_blank" rel="noopener">Claude.ai</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>ChatGPT</h3>
+            <div class="kvs">
+              <a href="https://chat.openai.com" class="btn" target="_blank" rel="noopener">Open ChatGPT</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="eval">
+        <div class="row">
+          <h2 id="eval">Evaluation</h2>
+        </div>
+        <div class="card">
+          <h3>Evaluation Tool Slot</h3>
+          <a id="evaluationLink" class="btn" target="_blank" rel="noopener">Open Evaluation Tool</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Built for your workflow.
+    </footer>
+  </div>
+
+  <dialog id="editor">
+    <form method="dialog">
+      <h3>Edit Links</h3>
+      <div class="muted">Customize titles, URLs, and tags. Leave blanks to hide cards.</div>
+      <div id="formFields" class="grid" style="margin:12px 0; grid-template-columns:1fr 1fr; gap:10px"></div>
+      <menu>
+        <button value="cancel" class="btn" type="button" onclick="this.closest('dialog').close()">Cancel</button>
+        <button id="save" value="default" class="btn" type="button">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
