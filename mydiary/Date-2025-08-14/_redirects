@@ -1,0 +1,6 @@
+# Netlify redirects file
+# Handle SPA routing
+/*    /index.html   200
+
+# Optional: Redirect HTTP to HTTPS (Netlify handles this automatically)
+# http://your-site.netlify.app/*    https://your-site.netlify.app/:splat    301!

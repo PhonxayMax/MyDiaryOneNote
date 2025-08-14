@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Dev Workflow Hub — HTML/CSS/JS (Modular)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>Developer Workflow Hub</h1>
+          <div class="tag">Lucidchart → Cursor/Code → CodePen/OneCompiler → Git/GitHub → Claude/ChatGPT → Evaluation</div>
+          <div class="workflow-status">
+            <span class="status-indicator" id="workflowStatus">Ready</span>
+            <span class="last-updated" id="lastUpdated"></span>
+          </div>
+        </div>
+      </div>
+      <div class="toolbar">
+        <input id="q" type="search" placeholder="Search cards (e.g. lucidchart, codepen, github, evaluation…)" />
+        <button id="edit">Edit Links</button>
+        <button id="reset">Reset</button>
+        <button id="export">Export Config</button>
+        <button id="import">Import Config</button>
+      </div>
+    </header>
+
+    <main>
+      <section aria-labelledby="workflow-progress">
+        <h2 id="workflow-progress">Workflow Progress</h2>
+        <div class="progress-container">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+          </div>
+          <div class="progress-steps" id="progressSteps">
+            <div class="step" data-step="planning">1. Planning</div>
+            <div class="step" data-step="opening">2. Opening</div>
+            <div class="step" data-step="prototyping">3. Prototyping</div>
+            <div class="step" data-step="assembling">4. Assembling</div>
+            <div class="step" data-step="testing">5. Testing</div>
+            <div class="step" data-step="versionControl">6. Version Control</div>
+            <div class="step" data-step="deploying">7. Deploying</div>
+            <div class="step" data-step="maintaining">8. Maintaining</div>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="quicklaunch">
+        <h2 id="quicklaunch">Quick Launch</h2>
+        <div class="filter-tabs">
+          <button class="filter-btn active" data-filter="all">All Tools</button>
+          <button class="filter-btn" data-filter="planning">Planning</button>
+          <button class="filter-btn" data-filter="development">Development</button>
+          <button class="filter-btn" data-filter="prototyping">Prototyping</button>
+          <button class="filter-btn" data-filter="version-control">Version Control</button>
+          <button class="filter-btn" data-filter="ai">AI Tools</button>
+          <button class="filter-btn" data-filter="deployment">Deployment</button>
+        </div>
+        <div id="cards" class="grid cards"></div>
+        <div class="foot">
+          Tip: Click <b>Edit Links</b> to customize titles/URLs and they'll be saved to your browser (localStorage).
+          <div class="usage-stats" id="usageStats"></div>
+        </div>
+      </section>
+
+      <section aria-labelledby="embeds">
+        <h2 id="embeds">Live Embeds</h2>
+        <div class="card">
+          <div class="row">
+            <h3>CodePen Prototype</h3>
+            <span class="pill">embedded</span>
+          </div>
+          <iframe id="codepenFrame" src="https://codepen.io/PhonxayMax/embed/WbQdeoq?default-tab=html%2Cresult" height="320" allowfullscreen loading="lazy"></iframe>
+          <div class="muted">If the embed doesn't load, open in a new tab: <a href="https://codepen.io/PhonxayMax/pen/WbQdeoq" id="codepenLink" target="_blank" rel="noopener">Open CodePen</a></div>
+        </div>
+        <div class="card">
+          <div class="row">
+            <h3>Planning Diagram (Lucidchart)</h3>
+            <span class="pill">open in new tab</span>
+          </div>
+          <div class="muted">Private Lucidchart docs often block iframe. Use the button to open with your access.</div>
+          <div class="kvs">
+            <a href="https://lucid.app/lucidchart/f0cf13ab-f388-407e-ad1b-cc2d107e6e45/edit?invitationId=inv_e731072d-eb1b-4a05-8b5e-245e5f66be0d&page=0_0#" id="lucidOpen" class="btn" target="_blank" rel="noopener">Open Lucidchart</a>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="vcs">
+        <div class="row">
+          <h2 id="vcs">VCS Ops (Git/GitHub/GitKraken)</h2>
+          <span class="pill">cheatsheet</span>
+        </div>
+        <div class="grid">
+          <div class="card">
+            <h3>Quick Actions</h3>
+            <div class="kvs">
+              <a href="#" id="githubRepo" class="btn" target="_blank" rel="noopener">Open GitHub</a>
+              <a href="https://www.gitkraken.com/" id="gitkraken" class="btn" target="_blank" rel="noopener">Open GitKraken Site</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Push / Pull / Merge</h3>
+            <pre class="muted">git status
+git add -A
+git commit -m "update"
+git pull --rebase
+git push
+# Merge PRs in GitHub → Squash & merge</pre>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="notes">
+        <div class="row">
+          <h2 id="notes">Notes & OneNote</h2>
+          <span class="pill">links</span>
+        </div>
+        <div class="card">
+          <h3>OneNote / OneDrive</h3>
+          <div class="kvs">
+            <a href="https://onedrive.live.com/?id=%2Fpersonal%2F66789b30b92d6734%2FDocuments%2FDesktop%2Fstackblitz%2Fextract-zip%2FDate-14-08-2025%2F2025-08-14-task-01-javascript%2F2025-08-14-task-01-javascript--html-prototype&viewid=bdfeb64d-690d-410a-bd92-57022ac71de8" id="onenoteLink" class="btn" target="_blank" rel="noopener">Open OneNote Page</a>
+            <span class="kv copy" id="localPath">E:\_0_P1_MyDiaryOneNote\Date-12-08-2025\2025-08-12-task-01\2--cursor-ai--open-the-comprehensive-project-files\Notepad\mydiary\Date-2025-08-13</span>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="ai">
+        <div class="row">
+          <h2 id="ai">AI Assistants</h2>
+        </div>
+        <div class="grid cards">
+          <div class="card">
+            <h3>Claude Desktop / Web</h3>
+            <div class="kvs">
+              <a href="https://claude.ai" id="claudeChat" class="btn" target="_blank" rel="noopener">Open Claude Chat</a>
+              <a href="https://claude.ai" class="btn" target="_blank" rel="noopener">Claude.ai</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>ChatGPT</h3>
+            <div class="kvs">
+              <a href="https://chatgpt.com/c/689d9e29-0810-8333-a27a-7782ef07aecb" class="btn" target="_blank" rel="noopener">Open Current ChatGPT Session</a>
+              <a href="https://chat.openai.com" class="btn" target="_blank" rel="noopener">New ChatGPT Session</a>
+            </div>
+          </div>
+          <div class="card">
+            <h3>OneCompiler</h3>
+            <div class="kvs">
+              <a href="https://onecompiler.com/html/43tpbx2y9" class="btn" target="_blank" rel="noopener">Open Current Project</a>
+              <a href="https://onecompiler.com/html" class="btn" target="_blank" rel="noopener">New HTML Project</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="component-tracker">
+        <div class="row">
+          <h2 id="component-tracker">Component Development Tracker</h2>
+          <span class="pill">live tracking</span>
+        </div>
+        <div class="component-grid">
+          <div class="component-card" data-status="planning">
+            <h4>Header Component</h4>
+            <div class="component-status">
+              <span class="status-dot planning"></span>
+              <span>Planning Phase</span>
+            </div>
+            <div class="component-tools">
+              <small>Tools: Lucidchart → CodePen → OneCompiler</small>
+            </div>
+          </div>
+          <div class="component-card" data-status="prototyping">
+            <h4>Navigation Component</h4>
+            <div class="component-status">
+              <span class="status-dot prototyping"></span>
+              <span>Prototyping</span>
+            </div>
+            <div class="component-tools">
+              <small>Tools: CodePen Active</small>
+            </div>
+          </div>
+          <div class="component-card" data-status="assembling">
+            <h4>Content Section</h4>
+            <div class="component-status">
+              <span class="status-dot assembling"></span>
+              <span>Assembly Ready</span>
+            </div>
+            <div class="component-tools">
+              <small>Tools: Phoenix Code</small>
+            </div>
+          </div>
+          <div class="component-card" data-status="testing">
+            <h4>Footer Component</h4>
+            <div class="component-status">
+              <span class="status-dot testing"></span>
+              <span>Testing Phase</span>
+            </div>
+            <div class="component-tools">
+              <small>Tools: Claude Desktop</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="project-status">
+        <div class="row">
+          <h2 id="project-status">Project Status & Tools</h2>
+          <span class="pill">live tracking</span>
+        </div>
+        <div class="grid cards">
+          <div class="card status-card">
+            <h3>Planning Phase</h3>
+            <div class="status-indicator planning">
+              <span class="status-dot"></span>
+              <span>Lucidchart Active</span>
+            </div>
+            <div class="tool-info">
+              <small>Used for: Planning</small>
+            </div>
+          </div>
+          <div class="card status-card">
+            <h3>Development Phase</h3>
+            <div class="status-indicator development">
+              <span class="status-dot"></span>
+              <span>Cursor AI Active</span>
+            </div>
+            <div class="tool-info">
+              <small>Local: Notepad/mydiary/Date-2025-08-13</small>
+            </div>
+          </div>
+          <div class="card status-card">
+            <h3>Prototyping Phase</h3>
+            <div class="status-indicator prototyping">
+              <span class="status-dot"></span>
+              <span>CodePen & OneCompiler</span>
+            </div>
+            <div class="tool-info">
+              <small>For HTML, CSS, JS prototyping</small>
+            </div>
+          </div>
+          <div class="card status-card">
+            <h3>Version Control</h3>
+            <div class="status-indicator version-control">
+              <span class="status-dot"></span>
+              <span>Git & GitKraken</span>
+            </div>
+            <div class="tool-info">
+              <small>Local repo tracking</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section style="grid-column:1 / -1" aria-labelledby="eval">
+        <div class="row">
+          <h2 id="eval">Evaluation & Deployment</h2>
+        </div>
+        <div class="grid cards">
+          <div class="card">
+            <h3>Warp AI Terminal</h3>
+            <div class="kvs">
+              <a href="https://www.warp.dev/" class="btn" target="_blank" rel="noopener">Open Warp Terminal</a>
+            </div>
+            <div class="muted">For evaluating and improving workflow</div>
+          </div>
+          <div class="card">
+            <h3>Netlify Deployment</h3>
+            <div class="kvs">
+              <a href="https://app.netlify.com/" class="btn" target="_blank" rel="noopener">Open Netlify Dashboard</a>
+            </div>
+            <div class="muted">For project deployment</div>
+          </div>
+          <div class="card">
+            <h3>Phoenix Code</h3>
+            <div class="kvs">
+              <a href="#" class="btn" target="_blank" rel="noopener">Open Phoenix Code</a>
+            </div>
+            <div class="muted">For assembling components</div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      Built for your workflow.
+      <div class="footer-info">
+        <span>Last Updated: August 14, 2025</span>
+        <span>Tools: 12 Active</span>
+        <span>Project: 2025-08-14-task-01-javascript</span>
+      </div>
+    </footer>
+  </div>
+
+  <dialog id="editor">
+    <form method="dialog">
+      <h3>Edit Links</h3>
+      <div class="muted">Customize titles, URLs, and tags. Leave blanks to hide cards. Changes are saved locally.</div>
+      <div id="formFields" class="grid" style="margin:12px 0; grid-template-columns:1fr 1fr; gap:10px"></div>
+      <div class="dialog-actions">
+        <label for="importFile" class="btn secondary">Import JSON</label>
+        <input type="file" id="importFile" accept=".json" style="display:none">
+        <button type="button" id="exportBtn" class="btn secondary">Export JSON</button>
+      </div>
+      <menu>
+        <button value="cancel" class="btn" type="button" onclick="this.closest('dialog').close()">Cancel</button>
+        <button id="save" value="default" class="btn" type="button">Save</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <dialog id="statusDialog">
+    <form method="dialog">
+      <h3>Workflow Status</h3>
+      <div class="status-overview">
+        <div class="workflow-step">
+          <input type="checkbox" id="planning-done">
+          <label for="planning-done">Planning Complete</label>
+        </div>
+        <div class="workflow-step">
+          <input type="checkbox" id="coding-done">
+          <label for="coding-done">Coding Complete</label>
+        </div>
+        <div class="workflow-step">
+          <input type="checkbox" id="prototype-done">
+          <label for="prototype-done">Prototype Complete</label>
+        </div>
+        <div class="workflow-step">
+          <input type="checkbox" id="version-control-done">
+          <label for="version-control-done">Version Control Complete</label>
+        </div>
+        <div class="workflow-step">
+          <input type="checkbox" id="evaluation-done">
+          <label for="evaluation-done">Evaluation Complete</label>
+        </div>
+        <div class="workflow-step">
+          <input type="checkbox" id="deployment-done">
+          <label for="deployment-done">Deployment Complete</label>
+        </div>
+      </div>
+      <menu>
+        <button value="cancel" class="btn" type="button" onclick="this.closest('dialog').close()">Cancel</button>
+        <button id="saveStatus" value="default" class="btn" type="button">Save Status</button>
+      </menu>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
